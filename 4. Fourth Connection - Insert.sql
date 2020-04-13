@@ -1,5 +1,8 @@
 /* Connection 2: writer a, updating */
 
+/* Show connection id */
+SELECT @@SPID;
+
 /* Separating the batch with a "go", to show that a select will not be blocked by inserts/updates/deletes */
 select * from dbo.test_01
 go

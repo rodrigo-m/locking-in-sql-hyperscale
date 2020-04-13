@@ -1,4 +1,7 @@
 /* Connection 1: setup and reset */ 
+/* If you have executed scripts that leave open transactions and want to start over,        */
+/* close all scripts before you run this setup script again.                                */
+/* Closing the scripts will kill the connection and rollback the open transactions          */ 
 
 if OBJECT_ID('test_01') is not NULL 
     drop table dbo.test_01
