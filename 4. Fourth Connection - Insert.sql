@@ -1,4 +1,5 @@
-/* Connection 2: writer a, updating */
+/* Connection 2: writer, inserting                              */
+/* Concept: a writer *may not* be blocked by another writer      */
 
 /* Show connection id */
 SELECT @@SPID;
@@ -7,8 +8,8 @@ SELECT @@SPID;
 select * from dbo.test_01
 go
 
-/* The commands below will leave an open transaction. If the previous locks are row locks then nothing will block this insert */
-/* Can you expain why in this scenaio the delete was blocked, but the insert was not? */
+/* The commands below will leave an open transaction. If the previous locks are row locks then nothing will block this insert   */
+/* Can you expain why in this scenario the delete was blocked, but the insert was not?                                          */
 BEGIN TRANSACTION
 
 INSERT dbo.test_01

@@ -1,4 +1,5 @@
-/* Connection 2: writer, deleting */
+/* Connection 2: writer, deleting                                           */
+/* Scenario: a writer *may be* blocked by another writer. With a surprise.  */
 
 /* Show connection id */
 SELECT @@SPID;
@@ -9,9 +10,10 @@ SELECT @@SPID;
 select * from dbo.test_01
 go
 
-/* The commands below will be blocked by writers, but not by readers. Note that the second select will not run, as              */
-/*   the batch is blocked at the delete statement                                                                               */
-/* Note that you are attempting to delete a different row, but still get blocked. Can you explain why?                          */
+/* The commands below will be blocked by writers, but not by readers.                                                                        */
+/* Note that the second select will not run because SQL is waiting on the delete statement that is blocked.                                  */
+/*   the select command itself would not be blocked.                                                                                         */
+/* Note that the row you are attempting to delete is not the same being updated by script 2, but still get blocked. Can you explain why?     */
 
 /* The commands below will leave an open transaction with an exclusive lock */
 BEGIN TRANSACTION
