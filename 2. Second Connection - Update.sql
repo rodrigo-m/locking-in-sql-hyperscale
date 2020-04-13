@@ -1,14 +1,13 @@
-/* Connection 2: writer a, updating */
+/* Connection 2: writer, updating */
 /* assumption: RCSI is enabled throughout the exercise, the default for Hyperscale */
 SELECT name, snapshot_isolation_state_desc, is_read_committed_snapshot_on
 FROM sys.databases
 
-/* The update could be blocked by inserts/deletes, and will block inserts/deletes, but not selects */
+/* The update could be blocked by other connections that are writing to the database, but not by readers (selects) */
 
 select * from dbo.test_01
 
-/* The commands below will leave an open transaction with an update lock */
-
+/* The commands below will leave an open transaction with an exclusive lock for the row (in normal circumstances) */
 BEGIN TRANSACTION
 
 update dbo.test_01
